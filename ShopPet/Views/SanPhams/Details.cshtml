@@ -1,0 +1,108 @@
+﻿@model ShopPet.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Main-->
+
+<a class="buy_continute" href="#"><i class="fa fa-arrow-circle-left"></i> Trở lại mua hàng</a>
+
+<div class="product__details row">
+    <div class="product__details-img col-lg-4 col-md-4">
+        <div class="big-img">
+            <img src="@Html.DisplayFor(model => model.hinh)" alt="" id="zoom" style="visibility: visible;">
+        </div>
+        <div class="small-img d-flex mt-5">
+            <img src="./img/dohop.jpg" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/ae/4c/9e/ae4c9ea2edf887f6ad1e4e63cfae05b0.jpg'" class="small-imgg" alt="">
+            <img src="./img/dohop.jpg" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/ae/4c/9e/ae4c9ea2edf887f6ad1e4e63cfae05b0.jpg'" class="small-imgg" alt="">
+            <img src="./img/dohop.jpg" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/ae/4c/9e/ae4c9ea2edf887f6ad1e4e63cfae05b0.jpg'" class="small-imgg" alt="">
+            <img src="./img/dohop.jpg" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/ae/4c/9e/ae4c9ea2edf887f6ad1e4e63cfae05b0.jpg'" class="small-imgg" alt="">
+        </div>
+    </div>
+
+    <div class="product__details-info col-lg-8 col-md-8">
+        <h3 style="margin-top: unset; line-height: unset;">@Html.DisplayFor(model => model.tensp)</h3>
+        <div class="short-des">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam sit aliquid debitis voluptates ducimus, quasi iusto nam quaerat eius quidem.
+
+        </div><hr />
+
+        <div class="product__pride">
+            <div class="product__pride-oldPride" style="font-size: 20px; text-align: start;">
+                <span class="Price">
+                    <bdi>
+                        @Html.DisplayFor(model => model.giaban)
+                        <span class="currencySymbol">₫</span>
+                    </bdi>
+                </span>
+            </div>
+            <div class="product__pride-newPride" style="font-size: 40px; text-align: start;">
+                <span class="Price">
+                    <bdi>
+                        @Html.DisplayFor(model => model.giakhuyenmai)
+                        <span class="currencySymbol">₫</span>
+                    </bdi>
+                </span>
+            </div>
+
+        </div>
+
+        <form action="" method="POST">
+
+            <div class="number">
+                <span>
+                    Số lượng tồn
+                    <span class="number__count">
+                        @Html.DisplayFor(model => model.soluongton)
+                    </span>
+                </span>
+
+            </div>
+
+            <div class="product__cart">
+                <a href="@Url.Action("ThemGioHang", "GioHang", new { @id = Model.masp, @strURL = Request.Url.ToString() })" class="product__cart-add" name="add-to-cart">
+                    Thêm vào giỏ hàng
+                </a>
+                <h4 class="text-danger">@Html.Raw(TempData["themthanhcong"])</h4>
+                <h4 class="text-danger">@Html.Raw(TempData["msg"])</h4>
+                <h4 class="text-danger">@Html.Raw(TempData["kmua"])</h4>
+                <a href="@Url.Action("MuaNgay", "GioHang", new { @id = Model.masp, @strURL = Request.Url.ToString() })" class="product__cart-buy" name="buy-now">Mua ngay</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<!--Mô tả sản phẩm-->
+<div class="body__mainTitle">
+    <h2>MÔ TẢ SẢN PHẨM</h2>
+</div>
+        @Html.DisplayFor(model => model.mota)
+<hr />
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <div>Nội dung</div>
+    <div class="d-flex align-items-center">
+        <input type="hidden" id="rating" name="rating" value="0" />
+    </div>
+</div>
+<textarea name="content" class="form-control" style="outline: none; margin-bottom: 5px;"></textarea>
+<div>
+
+    <input class="btn btn-danger" type="submit" value="Gửi" />
+
+    <input data-val="true"
+           data-val-number="The field id_sp must be a number."
+           data-val-required="The id_sp field is required."
+           id="id_sp"
+           name="id_sp"
+           type="hidden"
+           value="0" />
+
+</div>
+
+

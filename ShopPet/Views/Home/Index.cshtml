@@ -1,0 +1,155 @@
+﻿@model PagedList.IPagedList<ShopPet.Models.SanPham>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>San Pham</h2>
+
+<!-- category Here -->
+<div class="body" style="padding-top: 10px;">
+    <div class="d-flex">
+        <div class="col-md-12 text-">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Danh mục</h1>
+                <div class="categ d-flex">
+                    @foreach (var item in ViewBag.DanhMuc)
+                    {
+
+                        <a href="@Url.Action("ProductDanhmuc", "Home", new { id = @item.idDanhmuc })">
+                            @item.tendanhmuc
+                        </a>
+                        <span>/</span>
+
+                    }
+                </div>
+
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="body__mainTitle">
+    <h2>Sản phẩm nổi bật</h2>
+</div>
+
+<div class="row">
+    <div class="post-wrapper2">
+        @foreach (var m in ViewBag.PhanTrangSP)
+        {
+            <div class="col-lg-2_5 col-md-4 col-6 post2">
+                <a href="#">
+                    <div class="product">
+                        <div class="product__img">
+                            <img src="@m.sanpham.hinh" alt="">
+                        </div>
+
+                        <div class="product__sale">
+                            <h4>Mới</h4>
+                        </div>
+
+
+                        <div class="product__content">
+                            <div class="product__title">
+                                @m.sanpham.tensp
+                            </div>
+
+                            <div class="product__pride-oldPride">
+                                <span class="Price">
+                                    <bdi>
+                                        @m.sanpham.giaban
+                                        <span class="currencySymbol">₫</span>
+                                    </bdi>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product__pride-newPride">
+                            <span class="Price">
+                                <bdi>
+                                    @m.sanpham.giakhuyenmai
+                                    <span class="currencySymbol">₫</span>
+                                </bdi>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    </div>
+
+
+    <div class="body__mainTitle d-flex align-items-center">
+        <h2>Sản phẩm dành cho chó</h2>
+    </div>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-6">
+                <a href="@Url.Action("Details", "SanPhams", new { id = item.masp })">
+                    <div class="product">
+                        <div class="product__img">
+                            <img src="@Html.DisplayFor(modelItem => item.hinh)" alt="">
+                        </div>
+
+                        <div class="product__sale">
+                            <h4>Mới</h4>
+                        </div>
+
+
+                        <div class="product__content">
+                            <div class="product__title">
+                                @Html.DisplayFor(modelItem => item.tensp)
+                            </div>
+
+                            <div class="product__pride-oldPride">
+                                <span class="Price">
+                                    <bdi>
+                                        @Html.DisplayFor(modelItem => item.giaban)
+                                        <span class="currencySymbol">₫</span>
+                                    </bdi>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product__pride-newPride">
+                            <span class="Price">
+                                <bdi>
+                                    @Html.DisplayFor(modelItem => item.giakhuyenmai)
+                                    <span class="currencySymbol">₫</span>
+                                </bdi>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <div class="MenuTrang">
+            <!-- Replace the following line with Bootstrap pagination -->
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+                new PagedListRenderOptions
+                {
+                    UlElementClasses = new[] { "pagination" },
+                    LiElementClasses = new[] { "page-item" }
+                })
+        </div>
+    </div>
+
+
+</div>
+

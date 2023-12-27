@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<!--Main-->
+<div class="login-form">
+    <div class="height360">
+        <div class="main">
+            <form action="" method="POST" class="form" id="form-2">
+
+                <div class="form-group">
+                    @if (@TempData["dangKyThanhCong"] != null)
+                    {
+                        <div class="text-success">@TempData["dangKyThanhCong"]</div>
+                    }
+                </div>
+
+                <h3 class="heading">Đăng nhập</h3>
+
+
+                <div class="form-group">
+                    <label for="Fullname" class="form-label">Tên tài khoản</label>
+                    <input type="text" name="tentaikhoan" class="form-control">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" name="matkhau" class="form-control">
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    @if (@TempData["DangNhapThatBai"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["DangNhapThatBai"]</div>
+                    }
+
+                </div>
+
+                <button type="submit" class="form-submit" value="Login" name="login_submit">Đăng nhập</button>
+
+                <div class="dont-have-account">
+                    Bạn chưa có tài khoản? <a class="account-register" href="@Url.Action("DangKy", "Login")">Đăng ký ngay</a>
+                </div>
+                <div class="dont-have-account">
+                    Quên mật khẩu? <a class="account-register" href="#">Lấy lại mật khẩu</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

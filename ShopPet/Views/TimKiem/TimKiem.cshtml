@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<ShopPet.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "TimKiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="body__mainTitle d-flex justify-content-between align-items-center">
+        <h2>Sản phẩm tìm kiếm</h2>
+        <h4 class="text-danger">@Html.Raw(TempData["thongbaododai"])</h4>
+        <h4 class="text-danger">@Html.Raw(TempData["thongbaodetrrong"])</h4>
+        
+    </div>
+
+    <div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-lg-2_5 col-md-4 col-6">
+                <a href="@Url.Action("Details", "SanPhams", new { id = item.masp })">
+                    <div class="product">
+                        <div class="product__img">
+                            <img src="@item.hinh" alt="">
+                        </div>
+                        @if (item.giamgia == 0 || item.giamgia == null)
+                        {
+                            <div class="product__sale">
+                                <h4>Mới</h4>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="product__sale">
+                                <h4>@item.giamgia %</h4>
+                            </div>
+                        }
+                        <div class="product__content">
+                            <div class="product__title">
+                                @Html.DisplayFor(modelItem => item.tensp)
+                            </div>
+
+                            @if (!(item.giamgia == 0 || item.giamgia == null))
+                            {
+                                <div class="product__pride-oldPride">
+                                    <span class="Price">
+                                        <bdi>
+                                            @String.Format("{0:N0}", item.giaban)
+                                            <span class="currencySymbol">₫</span>
+                                        </bdi>
+                                    </span>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product__pride-newPride">
+                            <span class="Price">
+                                <bdi>
+                                    @String.Format("{0:N0}", item.giakhuyenmai)
+                                    <span class="currencySymbol">₫</span>
+                                </bdi>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            }
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+
+        <div class="MenuTrang">
+
+            @Html.PagedListPager(Model, page => Url.Action("TimKiem", new
+           {
+               page = page, search = ViewBag.Search
+           }))
+        </div>
+    </div>
+
